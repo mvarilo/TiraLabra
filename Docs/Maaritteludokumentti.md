@@ -18,5 +18,7 @@ Tietorakenteina aion todennäköisesti käyttää ainakin pinoa (tila ja aikavaatimus
 
 # Lähteet
 http://www.redblobgames.com/pathfinding/a-star/introduction.html
+
 http://en.wikipedia.org/wiki/A*_search_algorithm
+
 Tietorakenteet ja algoritmit -kurssin materiaali
