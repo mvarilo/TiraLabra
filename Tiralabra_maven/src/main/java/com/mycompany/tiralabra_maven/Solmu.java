@@ -6,24 +6,57 @@
 package com.mycompany.tiralabra_maven;
 
 /**
+ * Vastaa labyrintin solmujen toteutuksesta
  *
  * @author MV
  */
-class Solmu {
+public class Solmu {
 
     private int x, y;
     private boolean obstacle;
 
-    Solmu(int i, int j) {
+    /**
+     * Luo solmun ja tallentaa koordinaatit
+     *
+     * @param i
+     * @param j
+     */
+    public Solmu(int i, int j) {
         this.x = i;
         this.y = j;
     }
 
+    /**
+     * Tulostaa solmun
+     *
+     * @return 
+     */
     public String toString() {
         return "x: " + this.x + ", y: " + this.y;
     }
 
-    boolean isObstacle() {
+    /**
+     *
+     * @return
+     */
+    public int getX() {
+        return x;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getY() {
+        return y;
+    }
+
+    /**
+     * Tarkastaa onko solmussa este
+     *
+     * @return 
+     */
+    public boolean isObstacle() {
         return obstacle;
     }
 }

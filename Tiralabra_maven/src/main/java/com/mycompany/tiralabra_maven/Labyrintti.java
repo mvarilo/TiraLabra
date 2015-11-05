@@ -6,6 +6,7 @@
 package com.mycompany.tiralabra_maven;
 
 /**
+ * Labyrintin muodostus
  *
  * @author MV
  */
@@ -15,6 +16,12 @@ public class Labyrintti {
     private Solmu start;
     private Solmu goal;
 
+    /**
+     * Konstruktori luo pyydetyn kokoisen labyrintin ja antaa sille lähtö ja
+     * maaliarvot
+     *
+     * @param koko labyrintin koko
+     */
     public Labyrintti(int koko) {
         this.labyrintti = new Solmu[koko][koko];
         for (int i = 0; i < labyrintti.length; i++) {
@@ -26,14 +33,22 @@ public class Labyrintti {
         startAndGoal();
     }
 
+    /**
+     * Tulostaa labyrintin solmujen koordinaatit
+     *
+     */
     public void tulosta() {
-        for (int i = 0; i < labyrintti.length; i++) {
+        for (Solmu[] labyrintti1 : labyrintti) {
             for (int j = 0; j < labyrintti.length; j++) {
-                System.out.println(labyrintti[i][j].toString());
+                System.out.println(labyrintti1[j].toString());
             }
         }
     }
 
+    /**
+     * Visualisoi labyrintin helposti luettavassa muodossa
+     *
+     */
     public void visualisoi() {
         System.out.println("Labyrintti:");
         System.out.println("start = s");
@@ -41,17 +56,14 @@ public class Labyrintti {
         System.out.println("obstacle = # \n");
 
         for (int j = 0; j < labyrintti.length; j++) {
-            for (int i = 0; i < labyrintti.length; i++) {
-                if(labyrintti[i][j] == start) {
+            for (Solmu[] labyrintti1 : labyrintti) {
+                if (labyrintti1[j] == start) {
                     System.out.print("[s]");
-                }
-                else if(labyrintti[i][j] == goal) {
+                } else if (labyrintti1[j] == goal) {
                     System.out.print("[g]");
-                }
-                else if(labyrintti[i][j].isObstacle() == true) {
+                } else if (labyrintti1[j].isObstacle() == true) {
                     System.out.print("[#]");
-                }
-                else {
+                } else {
                     System.out.print("[ ]");
                 }
             }
@@ -59,12 +71,41 @@ public class Labyrintti {
         }
     }
 
+    /**
+     * Arpoo (todo) lähtö ja maaliarvot labyrintille
+     *
+     */
     private void startAndGoal() {
         int min = 0;
         int max = this.labyrintti.length - 1;
 
-        start = this.labyrintti[1][1];
-        goal = this.labyrintti[4][4];
+        start = this.labyrintti[0][0];
+        goal = this.labyrintti[1][1];
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
+    public Solmu getSolmu(int x, int y) {
+        return this.labyrintti[x][y];
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public Solmu getStart() {
+        return this.start;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public Solmu getGoal() {
+        return this.goal;
+    }
 }
