@@ -10,10 +10,12 @@ package com.mycompany.tiralabra_maven;
  *
  * @author MV
  */
-public class Solmu {
+public class Solmu implements Comparable<Solmu> {
 
     private int x, y;
     private boolean obstacle;
+    private int g_score;
+    private int f_score;
 
     /**
      * Luo solmun ja tallentaa koordinaatit
@@ -22,14 +24,16 @@ public class Solmu {
      * @param j
      */
     public Solmu(int i, int j) {
+        this.g_score = Integer.MAX_VALUE;
         this.x = i;
         this.y = j;
+        this.obstacle = false;
     }
 
     /**
      * Tulostaa solmun
      *
-     * @return 
+     * @return
      */
     public String toString() {
         return "x: " + this.x + ", y: " + this.y;
@@ -54,9 +58,59 @@ public class Solmu {
     /**
      * Tarkastaa onko solmussa este
      *
-     * @return 
+     * @return
      */
     public boolean isObstacle() {
         return obstacle;
+    }
+
+    /**
+     *
+     * @param i
+     */
+    public void set_g_score(int i) {
+        this.g_score = i;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int get_g_score() {
+        return this.g_score;
+    }
+
+    /**
+     *
+     * @param goal
+     */
+    public void set_f_score(Solmu goal) {
+        this.f_score = Math.abs((this.x - goal.getX()) + (this.y - goal.getY())) + get_g_score();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int get_f_score() {
+        return this.f_score;
+    }
+
+    @Override
+    public int compareTo(Solmu o) {
+        if (this.get_f_score() < o.get_f_score()) {
+            return -1;
+        } else if (this.get_f_score() > o.get_f_score()) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     *
+     */
+    public void setObstacle() {
+        this.obstacle = true;
     }
 }

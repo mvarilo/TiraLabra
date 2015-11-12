@@ -5,9 +5,12 @@
  */
 package com.mycompany.tiralabra_maven;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.Before;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 /**
  * Testaa Solmu-luokkaa
@@ -24,6 +27,14 @@ public class SolmuTest {
     public SolmuTest() {
     }
 
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
     /**
      *
      * @throws Exception
@@ -31,6 +42,10 @@ public class SolmuTest {
     @Before
     public void setUp() throws Exception {
         this.solmu = new Solmu(1, 1);
+    }
+
+    @After
+    public void tearDown() throws Exception {
     }
 
     /**
@@ -58,6 +73,101 @@ public class SolmuTest {
     public void testToString() {
         String s = this.solmu.toString();
         assertEquals("x: 1, y: 1", s);
+    }
+
+    /**
+     * Test of isObstacle method, of class Solmu.
+     */
+    @Test
+    public void testIsObstacle() {
+        System.out.println("isObstacle");
+        Solmu instance = null;
+        boolean expResult = false;
+        boolean result = instance.isObstacle();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of set_g_score method, of class Solmu.
+     */
+    @Test
+    public void testSet_g_score() {
+        System.out.println("set_g_score");
+        int i = 0;
+        Solmu instance = null;
+        instance.set_g_score(i);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of get_g_score method, of class Solmu.
+     */
+    @Test
+    public void testGet_g_score() {
+        System.out.println("get_g_score");
+        Solmu instance = null;
+        int expResult = 0;
+        int result = instance.get_g_score();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of set_f_score method, of class Solmu.
+     */
+    @Test
+    public void testSet_f_score() {
+        System.out.println("set_f_score");
+        Solmu goal = null;
+        Solmu instance = null;
+        instance.set_f_score(goal);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of get_f_score method, of class Solmu.
+     */
+    @Test
+    public void testGet_f_score() {
+        System.out.println("get_f_score");
+        Solmu instance = null;
+        int expResult = 0;
+        int result = instance.get_f_score();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of compareTo method, of class Solmu.
+     */
+    @Test
+    public void testCompareTo() {
+        System.out.println("compareTo");
+        Solmu o = null;
+        Solmu instance = null;
+        int expResult = 0;
+        int result = instance.compareTo(o);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setObstacle method, of class Solmu.
+     */
+    @Test
+    public void testSetObstacle() {
+        System.out.println("setObstacle");
+        Solmu instance = null;
+        instance.setObstacle();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
 }

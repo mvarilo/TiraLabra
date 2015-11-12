@@ -5,6 +5,8 @@
  */
 package com.mycompany.tiralabra_maven;
 
+import java.util.ArrayList;
+
 /**
  * Labyrintin muodostus
  *
@@ -30,7 +32,7 @@ public class Labyrintti {
                 labyrintti[i][j] = uus;
             }
         }
-        startAndGoal();
+        testiLabyrintti();
     }
 
     /**
@@ -75,12 +77,25 @@ public class Labyrintti {
      * Arpoo (todo) lähtö ja maaliarvot labyrintille
      *
      */
-    private void startAndGoal() {
+    private void testiLabyrintti() {
         int min = 0;
         int max = this.labyrintti.length - 1;
 
         start = this.labyrintti[0][0];
-        goal = this.labyrintti[1][1];
+        goal = this.labyrintti[4][4];
+
+        Solmu s = this.labyrintti[0][3];
+        s.setObstacle();
+        s = this.labyrintti[1][3];
+        s.setObstacle();
+        s = this.labyrintti[2][3];
+        s.setObstacle();
+        s = this.labyrintti[3][3];
+        s.setObstacle();
+        s = this.labyrintti[4][3];
+        s.setObstacle();
+        s = this.labyrintti[5][3];
+        s.setObstacle();
     }
 
     /**
@@ -92,7 +107,7 @@ public class Labyrintti {
     public Solmu getSolmu(int x, int y) {
         return this.labyrintti[x][y];
     }
-    
+
     /**
      *
      * @return
@@ -100,12 +115,51 @@ public class Labyrintti {
     public Solmu getStart() {
         return this.start;
     }
-    
+
     /**
      *
      * @return
      */
     public Solmu getGoal() {
         return this.goal;
+    }
+
+    /**
+     * Etsii solmun naapurit, joissa ei ole estettä.
+     * 
+     * @param current
+     * @return
+     */
+    public ArrayList<Solmu> getNeighbours(Solmu current) {
+        ArrayList<Solmu> naapurit = new ArrayList<Solmu>();
+
+        if (current.getX() > 0 && current.isObstacle() != true) {
+            naapurit.add(this.labyrintti[current.getX() - 1][current.getY()]);
+        }
+
+        if (current.getX() < this.labyrintti.length - 1 && current.isObstacle() != true) {
+            naapurit.add((this.labyrintti[current.getX() + 1][current.getY()]));
+        }
+
+        if (current.getY() > 0 && current.isObstacle() != true) {
+            naapurit.add(this.labyrintti[current.getX()][current.getY() - 1]);
+        }
+
+        if (current.getY() < this.labyrintti.length - 1 && current.isObstacle() != true) {
+            naapurit.add((this.labyrintti[current.getX()][current.getY() + 1]));
+        }
+        return naapurit;
+    }
+
+    /**
+     * Palauttaa etäisyyden solmujen välillä 
+     * (tällä hetkellä etäisyys voi olla vain 1)
+     * 
+     * @param current
+     * @param neighbour
+     * @return
+     */
+    public int dist_between(Solmu current, Solmu neighbour) {
+        return 1;
     }
 }
