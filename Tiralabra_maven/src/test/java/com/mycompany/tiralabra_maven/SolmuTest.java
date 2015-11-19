@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 
 /**
  * Testaa Solmu-luokkaa
- * 
+ *
  * @author MV
  */
 public class SolmuTest {
@@ -65,7 +65,7 @@ public class SolmuTest {
         int s = this.solmu.getY();
         assertEquals(s, 1);
     }
-    
+
     /**
      *
      */
@@ -73,6 +73,60 @@ public class SolmuTest {
     public void testToString() {
         String s = this.solmu.toString();
         assertEquals("x: 1, y: 1", s);
+    }
+
+    /**
+     * Test of isObstacle method, of class Solmu.
+     */
+    @Test
+    public void testObstacle() {
+        Solmu instance = new Solmu(0, 0);
+        instance.setObstacle();
+        boolean expResult = true;
+        boolean result = instance.isObstacle();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of set_g_score method, of class Solmu.
+     */
+    @Test
+    public void test_g_score() {
+        System.out.println("set_g_score");
+        int i = 3;
+        Solmu instance = new Solmu(0, 0);
+        instance.set_g_score(i);
+        int expResult = 3;
+        int result = instance.get_g_score();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of set_f_score method, of class Solmu.
+     */
+    @Test
+    public void test_f_score() {
+        System.out.println("set_f_score");
+        Solmu goal = new Solmu(1, 1);
+        Solmu instance = new Solmu(0, 0);
+        instance.set_f_score(goal);
+        int result = instance.get_f_score();
+        System.out.println(result);
+    }
+
+    /**
+     * Test of compareTo method, of class Solmu.
+     */
+    @Test
+    public void testCompareTo() {
+        System.out.println("compareTo");
+        Solmu o = null;
+        Solmu instance = null;
+        int expResult = 0;
+        int result = instance.compareTo(o);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     /**
@@ -138,21 +192,6 @@ public class SolmuTest {
         Solmu instance = null;
         int expResult = 0;
         int result = instance.get_f_score();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of compareTo method, of class Solmu.
-     */
-    @Test
-    public void testCompareTo() {
-        System.out.println("compareTo");
-        Solmu o = null;
-        Solmu instance = null;
-        int expResult = 0;
-        int result = instance.compareTo(o);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

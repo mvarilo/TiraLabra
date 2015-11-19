@@ -18,8 +18,8 @@ public class Main {
         labyrintti.visualisoi();
 
         // labyrintti.tulosta();
-        Astar astar;
-        astar = new Astar(labyrintti, labyrintti.getStart(), labyrintti.getGoal());
+        Astar2 astar;
+        astar = new Astar2(labyrintti, labyrintti.getStart(), labyrintti.getGoal());
         //Etsii ja tulostaa lyhimmän reitin
         astar.search();
     }

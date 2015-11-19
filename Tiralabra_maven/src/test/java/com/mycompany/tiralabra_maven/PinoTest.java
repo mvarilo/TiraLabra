@@ -16,32 +16,31 @@ import static org.junit.Assert.*;
  *
  * @author MV
  */
-public class MainTest {
+public class PinoTest {
 
-    public MainTest() {
-    }
+    Pino pino;
+    Solmu solmu;
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
+    public PinoTest() {
     }
 
     @Before
     public void setUp() {
+        this.pino = new Pino(3);
+        this.solmu = new Solmu(1, 5);
     }
 
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of main method, of class Main.
-     */
     @Test
-    public void testMain() {
+    public void pushAndPop() {
+        this.pino.push(solmu);
+        String otetaanPinosta = this.pino.pop().toString();
+        assertEquals("x: 1, y: 5", otetaanPinosta);
+    }
+
+    @Test
+    public void testEmpty() {
+        String tyhja = "" + this.pino.empty();
+        assertEquals("true", tyhja);
     }
 
 }

@@ -11,19 +11,20 @@ import java.util.PriorityQueue;
 import java.util.Stack;
 
 /**
- * Toteuttaa A*-algoritmiin pohjautuvan lyhimmän reitin etsinnän. Käytetty javan
- * valmista kalustoa perustuen Wikipediasta löydettyyn pseudokoodiin.
+ * Toteuttaa A*-algoritmiin pohjautuvan lyhimmän reitin etsinnän. Käytetty omia
+ * tietorakenteita (todo) perustuen Wikipediasta löydettyyn pseudokoodiin.
  * http://en.wikipedia.org/wiki/A*_search_algorithm
  *
  *
  * @author MV
  */
-public class Astar {
+public class Astar2 {
 
     private Labyrintti labyrintti;
     private Solmu start;
     private Solmu goal;
     private PriorityQueue<Solmu> open;
+    private Keko open2;
     private ArrayList<Solmu> evaluated;
     private HashMap<Solmu, Solmu> Came_From;
 
@@ -34,11 +35,12 @@ public class Astar {
      * @param start
      * @param goal
      */
-    public Astar(Labyrintti labyrintti, Solmu start, Solmu goal) {
+    public Astar2(Labyrintti labyrintti, Solmu start, Solmu goal) {
         this.labyrintti = labyrintti;
         this.start = start;
         this.goal = goal;
         this.open = new PriorityQueue<Solmu>();
+        this.open2 = new Keko(this.labyrintti.getSize());
         this.evaluated = new ArrayList<Solmu>();
         this.Came_From = new HashMap<Solmu, Solmu>();
     }
@@ -89,7 +91,8 @@ public class Astar {
         System.out.println(this.start.toString());
 
         Solmu current = this.goal;
-        Stack<Solmu> pino = new Stack<Solmu>();
+        //Stack<Solmu> pino = new Stack<Solmu>();
+        Pino pino = new Pino(labyrintti.getSize());
 
         while (!(current.equals(this.start))) {
             pino.push(current);

@@ -147,4 +147,18 @@ public class LabyrinttiTest {
         fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of getSize method, of class Labyrintti.
+     */
+    @Test
+    public void testGetSize() {
+        System.out.println("getSize");
+        Labyrintti instance = null;
+        int expResult = 0;
+        int result = instance.getSize();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
 }

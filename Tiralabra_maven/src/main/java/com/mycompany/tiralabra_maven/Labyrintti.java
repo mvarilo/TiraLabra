@@ -126,7 +126,7 @@ public class Labyrintti {
 
     /**
      * Etsii solmun naapurit, joissa ei ole estettä.
-     * 
+     *
      * @param current
      * @return
      */
@@ -152,14 +152,18 @@ public class Labyrintti {
     }
 
     /**
-     * Palauttaa etäisyyden solmujen välillä 
-     * (tällä hetkellä etäisyys voi olla vain 1)
-     * 
+     * Palauttaa etäisyyden solmujen välillä (tällä hetkellä etäisyys voi olla
+     * vain 1)
+     *
      * @param current
      * @param neighbour
      * @return
      */
     public int dist_between(Solmu current, Solmu neighbour) {
         return 1;
+    }
+
+    public int getSize() {
+        return this.labyrintti.length;
     }
 }

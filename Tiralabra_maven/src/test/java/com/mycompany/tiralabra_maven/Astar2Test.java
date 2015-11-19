@@ -5,7 +5,6 @@
  */
 package com.mycompany.tiralabra_maven;
 
-import java.util.Stack;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,42 +16,37 @@ import static org.junit.Assert.*;
  *
  * @author MV
  */
-public class AstarTest {
-
-    Labyrintti labyrintti;
-    Astar astar;
-    Solmu start, goal;
-
-    public AstarTest() {
+public class Astar2Test {
+    
+    public Astar2Test() {
     }
-
+    
     @BeforeClass
     public static void setUpClass() {
     }
-
+    
     @AfterClass
     public static void tearDownClass() {
     }
-
+    
     @Before
     public void setUp() {
-        this.labyrintti = new Labyrintti(7);
-        this.start = labyrintti.getStart();
-        this.goal = labyrintti.getGoal();
-
-        this.astar = new Astar(labyrintti, start, goal);
     }
-
+    
     @After
     public void tearDown() {
     }
 
     /**
-     * Test of search method, of class Astar.
+     * Test of search method, of class Astar2.
      */
     @Test
     public void testSearch() {
-        this.astar.search();
+        System.out.println("search");
+        Astar2 instance = null;
+        instance.search();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
-
+    
 }
