@@ -17,22 +17,22 @@ import static org.junit.Assert.*;
  * @author MV
  */
 public class KekoTest {
-    
+
     public KekoTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -79,19 +79,6 @@ public class KekoTest {
     }
 
     /**
-     * Test of remove method, of class Keko.
-     */
-    @Test
-    public void testRemove() {
-        System.out.println("remove");
-        Solmu current = null;
-        Keko instance = null;
-        instance.remove(current);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of contains method, of class Keko.
      */
     @Test
@@ -105,5 +92,34 @@ public class KekoTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+
+    /**
+     * Test of getLength method, of class Keko.
+     */
+    @Test
+    public void testGetLength() {
+        System.out.println("getLength");
+        Keko instance = null;
+        int expResult = 0;
+        int result = instance.getLength();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getIndex method, of class Keko.
+     */
+    @Test
+    public void testGetIndex() {
+        System.out.println("getIndex");
+        int i = 0;
+        Keko instance = null;
+        Solmu expResult = null;
+        Solmu result = instance.getIndex(i);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
 }

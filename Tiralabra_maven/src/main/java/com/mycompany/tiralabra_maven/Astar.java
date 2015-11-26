@@ -13,6 +13,9 @@ import java.util.Stack;
 /**
  * Toteuttaa A*-algoritmiin pohjautuvan lyhimmän reitin etsinnän. Käytetty javan
  * valmista kalustoa perustuen Wikipediasta löydettyyn pseudokoodiin.
+ * 
+ * Tällä hetkellä ei ole aivan kaikkea mitä Astar2:sta löytyy.
+ * 
  * http://en.wikipedia.org/wiki/A*_search_algorithm
  *
  *

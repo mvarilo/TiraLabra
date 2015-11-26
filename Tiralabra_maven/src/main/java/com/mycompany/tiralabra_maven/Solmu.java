@@ -16,6 +16,10 @@ public class Solmu implements Comparable<Solmu> {
     private boolean obstacle;
     private int g_score;
     private int f_score;
+    private int index;
+    private int totalCost;
+    private Solmu edellinen;
+    private boolean visited;
 
     /**
      * Luo solmun ja tallentaa koordinaatit
@@ -28,6 +32,8 @@ public class Solmu implements Comparable<Solmu> {
         this.x = i;
         this.y = j;
         this.obstacle = false;
+        this.edellinen = null;
+        this.visited = false;
     }
 
     /**
@@ -112,5 +118,43 @@ public class Solmu implements Comparable<Solmu> {
      */
     public void setObstacle() {
         this.obstacle = true;
+    }
+
+    /**
+     *
+     * @param i
+     */
+    public void setIndex(int i) {
+        this.index = i;
+    }
+
+    /**
+     *
+     */
+    public void setVisited() {
+        this.visited = true;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean isVisited() {
+        if (this.visited == true) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @param current
+     */
+    public void setPrevious(Solmu current) {
+        this.edellinen = current;
+    }
+
+    Solmu getPrevious() {
+        return this.edellinen;
     }
 }

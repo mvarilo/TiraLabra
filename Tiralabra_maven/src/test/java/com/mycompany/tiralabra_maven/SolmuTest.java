@@ -209,4 +209,70 @@ public class SolmuTest {
         fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of setIndex method, of class Solmu.
+     */
+    @Test
+    public void testSetIndex() {
+        System.out.println("setIndex");
+        int i = 0;
+        Solmu instance = null;
+        instance.setIndex(i);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setVisited method, of class Solmu.
+     */
+    @Test
+    public void testSetVisited() {
+        System.out.println("setVisited");
+        Solmu instance = null;
+        instance.setVisited();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of isVisited method, of class Solmu.
+     */
+    @Test
+    public void testIsVisited() {
+        System.out.println("isVisited");
+        Solmu instance = null;
+        boolean expResult = false;
+        boolean result = instance.isVisited();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setPrevious method, of class Solmu.
+     */
+    @Test
+    public void testSetPrevious() {
+        System.out.println("setPrevious");
+        Solmu current = null;
+        Solmu instance = null;
+        instance.setPrevious(current);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getPrevious method, of class Solmu.
+     */
+    @Test
+    public void testGetPrevious() {
+        System.out.println("getPrevious");
+        Solmu instance = null;
+        Solmu expResult = null;
+        Solmu result = instance.getPrevious();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
 }

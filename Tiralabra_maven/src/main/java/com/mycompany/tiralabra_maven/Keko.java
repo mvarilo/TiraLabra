@@ -6,32 +6,152 @@
 package com.mycompany.tiralabra_maven;
 
 /**
+ * Minimikeon toteutus.
  *
  * @author MV
  */
-class Keko {
+public class Keko {
 
+    private int keonKoko;
+    private int keonPituus;
+    private Solmu[] keko;
+
+    /**
+     * Konstruktori tekee annetun kokoisen taulukon ja asettaa keon pituudeksi 0
+     *
+     * @param size
+     */
     public Keko(int size) {
+        this.keonKoko = size;
+        this.keonPituus = 0;
+        this.keko = new Solmu[this.keonKoko];
+        for (int i = 0; i < this.keonKoko; i++) {
+            this.keko[i] = null;
+        }
     }
 
-    void add(Solmu start) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Lisää kekoon uuden solmun
+     *
+     * @param solmu
+     */
+    public void add(Solmu solmu) {
+        if (this.keonPituus == 0) {
+            keko[0] = solmu;
+            solmu.setIndex(0);
+            this.keonPituus++;
+        } else {
+            this.keonPituus++;
+            int i = this.keonPituus - 1;
+            while (i > 0 && keko[vanhempi(i)].get_f_score() > solmu.get_f_score()) {
+                keko[i] = keko[vanhempi(i)];
+                keko[i].setIndex(i);
+                i = vanhempi(i);
+            }
+            keko[i] = solmu;
+            solmu.setIndex(i);
+        }
     }
 
-    boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Tarkastaa onko keossa alkioita
+     *
+     * @return
+     */
+    public boolean isEmpty() {
+        return this.keonPituus == 0;
     }
 
-    Solmu poll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Poistaa juurena olleen alkion ja korjaa keon
+     *
+     * @return Solmu min
+     */
+    public Solmu poll() {
+        Solmu min = keko[0];
+        keko[0] = keko[this.keonPituus - 1];
+
+        this.keonPituus--;
+        heapify(0);
+
+        return min;
     }
 
-    void remove(Solmu current) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     *
+     * @param neighbour
+     * @return
+     */
+    public boolean contains(Solmu neighbour) {
+        int vasen = 0;
+        int oikea = this.keonPituus - 1;
+        boolean found = false;
+
+        while (vasen <= oikea && found == false) {
+            int keski = (vasen + oikea) / 2;
+            if (this.keko[keski] == neighbour) {
+                found = true;
+                return found;
+            }
+            if (this.keko[keski].get_f_score() > neighbour.get_f_score()) {
+                oikea = keski - 1;
+            } else {
+                vasen = keski + 1;
+            }
+        }
+        return false;
     }
 
-    boolean contains(Solmu neighbour) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private int vanhempi(int i) {
+        return (((i + 1) / 2) - 1);
+    }
+
+    private void heapify(int i) {
+        int v = vasen(i);
+        int o = right(i);
+        int pienin;
+
+        if (o <= this.keonPituus) {
+            if (this.keko[v].get_f_score() < this.keko[o].get_f_score()) {
+                pienin = v;
+            } else {
+                pienin = o;
+            }
+            if (this.keko[i].get_f_score() > this.keko[pienin].get_f_score()) {
+                Solmu apu = this.keko[i];
+                this.keko[i] = keko[pienin];
+                this.keko[pienin] = apu;
+
+                heapify(pienin);
+            }
+        } else {
+            if (o == this.keonPituus && this.keko[i].get_f_score() < this.keko[o].get_f_score()) {
+                Solmu apu = keko[i];
+                keko[i] = keko[o];
+                keko[o] = apu;
+            }
+        }
+    }
+
+    private int vasen(int i) {
+        return 2 * i + 1;
+    }
+
+    private int right(int i) {
+        return 2 * i + 2;
+    }
+
+    /**
+     * Palauttaa keon pituuden
+     *
+     * @return
+     */
+    public int getLength() {
+        return this.keonPituus;
+    }
+
+    Solmu getIndex(int i) {
+        return keko[i];
     }
 
 }

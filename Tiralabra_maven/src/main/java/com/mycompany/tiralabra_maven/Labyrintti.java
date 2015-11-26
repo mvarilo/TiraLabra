@@ -74,6 +74,38 @@ public class Labyrintti {
     }
 
     /**
+     *
+     * @param polku
+     */
+    public void visualisoiPolku(Pino polku) {
+        System.out.println("\nLabyrintti:");
+        System.out.println("start = s");
+        System.out.println("goal = g");
+        System.out.println("obstacle = #");
+        System.out.println("path = p");
+        System.out.println("visited = v \n");
+
+        for (int j = 0; j < labyrintti.length; j++) {
+            for (int i = 0; i < labyrintti.length; i++) {
+                if (labyrintti[i][j] == start) {
+                    System.out.print("[s]");
+                } else if (labyrintti[i][j] == goal) {
+                    System.out.print("[g]");
+                } else if (labyrintti[i][j].isObstacle()) {
+                    System.out.print("[#]");
+                } else if (polku.contains(this.getSolmu(i, j))) {
+                    System.out.print("[p]");
+                } else if (this.getSolmu(i, j).isVisited()) {
+                    System.out.print("[v]");
+                } else {
+                    System.out.print("[ ]");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    /**
      * Arpoo (todo) lähtö ja maaliarvot labyrintille
      *
      */
@@ -163,7 +195,38 @@ public class Labyrintti {
         return 1;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSize() {
-        return this.labyrintti.length;
+        return this.labyrintti.length * this.labyrintti.length;
+    }
+
+    /**
+     *
+     * @param current
+     * @return
+     */
+    public Keko getNeighbours2(Solmu current) {
+        Keko naapurit = new Keko(8);
+
+        if (current.getX() > 0 && current.isObstacle() != true) {
+            naapurit.add(this.labyrintti[current.getX() - 1][current.getY()]);
+        }
+
+        if (current.getX() < this.labyrintti.length - 1 && current.isObstacle() != true) {
+            naapurit.add((this.labyrintti[current.getX() + 1][current.getY()]));
+        }
+
+        if (current.getY() > 0 && current.isObstacle() != true) {
+            naapurit.add(this.labyrintti[current.getX()][current.getY() - 1]);
+        }
+
+        if (current.getY() < this.labyrintti.length - 1 && current.isObstacle() != true) {
+            naapurit.add((this.labyrintti[current.getX()][current.getY() + 1]));
+        }
+
+        return naapurit;
     }
 }

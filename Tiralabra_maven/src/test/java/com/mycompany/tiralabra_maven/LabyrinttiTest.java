@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 /**
  * Testaa Labyrintti-luokkaa
- * 
+ *
  * @author MV
  */
 public class LabyrinttiTest {
@@ -65,7 +65,7 @@ public class LabyrinttiTest {
         System.out.println("getSolmu");
         int x = 0;
         int y = 0;
-        String expResult = new Solmu(0,0).toString();
+        String expResult = new Solmu(0, 0).toString();
         String result = this.labyrintti.getSolmu(x, y).toString();
         assertEquals(expResult, result);
     }
@@ -156,6 +156,34 @@ public class LabyrinttiTest {
         Labyrintti instance = null;
         int expResult = 0;
         int result = instance.getSize();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of visualisoiPolku method, of class Labyrintti.
+     */
+    @Test
+    public void testVisualisoiPolku() {
+        System.out.println("visualisoiPolku");
+        Pino polku = null;
+        Labyrintti instance = null;
+        instance.visualisoiPolku(polku);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getNeighbours2 method, of class Labyrintti.
+     */
+    @Test
+    public void testGetNeighbours2() {
+        System.out.println("getNeighbours2");
+        Solmu current = null;
+        Labyrintti instance = null;
+        Keko expResult = null;
+        Keko result = instance.getNeighbours2(current);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

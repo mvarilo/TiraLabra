@@ -48,5 +48,33 @@ public class Astar2Test {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of searchKeko method, of class Astar2.
+     */
+    @Test
+    public void testSearchKeko() {
+        System.out.println("searchKeko");
+        Astar2 instance = null;
+        boolean expResult = false;
+        boolean result = instance.searchKeko();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getPolku method, of class Astar2.
+     */
+    @Test
+    public void testGetPolku() {
+        System.out.println("getPolku");
+        Astar2 instance = null;
+        Pino expResult = null;
+        Pino result = instance.getPolku();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

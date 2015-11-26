@@ -36,4 +36,12 @@ class Pino {
         return pop;
     }
 
+    boolean contains(Solmu solmu) {
+        for (int i = 0; i < this.top; i++) {
+            if (taulukko[i] == solmu) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
