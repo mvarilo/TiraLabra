@@ -36,10 +36,10 @@ public class Astar2 {
      * @param start
      * @param goal
      */
-    public Astar2(Labyrintti labyrintti, Solmu start, Solmu goal) {
+    public Astar2(Labyrintti labyrintti) {
         this.labyrintti = labyrintti;
-        this.start = start;
-        this.goal = goal;
+        this.start = this.labyrintti.getStart();
+        this.goal = this.labyrintti.getGoal();
         this.open = new PriorityQueue<Solmu>();
         this.open2 = new Keko(this.labyrintti.getSize());
         this.evaluated = new ArrayList<Solmu>();
@@ -48,9 +48,10 @@ public class Astar2 {
     }
 
     /**
-     * Etsii ja tulostaa lyhimmän reitin labyrintin läpi.
+     * Etsii ja tulostaa lyhimmän reitin labyrintin läpi käyttäen valmiita
+     * tietorakenteita.
      */
-    public void search() {
+    public boolean searchPriorityQueue() {
         this.open.add(start);
         this.start.set_g_score(0);
         this.start.set_f_score(this.goal);
@@ -59,7 +60,8 @@ public class Astar2 {
             Solmu current = this.open.poll();
 
             if (current.equals(goal)) {
-                reconstructPath(Came_From, goal);
+                reconstructPath();
+                return true;
             }
 
             this.open.remove(current);
@@ -67,10 +69,13 @@ public class Astar2 {
 
             handleNeighbours(current);
         }
+        return false;
 
     }
 
     /**
+     * Etsii ja tulostaa lyhimmän reitin labyrintin läpi käyttäen omia
+     * tietorakenteita.
      *
      * @return
      */
@@ -93,7 +98,7 @@ public class Astar2 {
         return false;
     }
 
-    private void handleNeighbours(Solmu current) {
+    private void handleNeighboursOld(Solmu current) {
         ArrayList<Solmu> neighbours = this.labyrintti.getNeighbours(current);
 
         for (Solmu neighbour : neighbours) {
@@ -129,19 +134,48 @@ public class Astar2 {
         }
     }
 
+    private void handleNeighbours(Solmu current) {
+
+        ArrayList<Solmu> neighbours = this.labyrintti.getNeighbours(current);
+
+        for (Solmu neighbour : neighbours) {
+
+            if (!neighbour.isVisited()) {
+
+                int arvioAlkuun = current.get_g_score()
+                        + labyrintti.dist_between(current, neighbour);
+
+                if (!this.open.contains(neighbour) || arvioAlkuun < neighbour.get_g_score()) {
+                    neighbour.setPrevious(current);
+                    neighbour.set_g_score(arvioAlkuun);
+                    neighbour.set_f_score(goal);
+
+                    if (!this.open.contains(neighbour)) {
+                        this.open.add(neighbour);
+                    } else {
+                        this.open2.update(open2.getIndex(neighbour));
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
     private void handleNeighbours2(Solmu current) {
         Keko naapurit = this.labyrintti.getNeighbours2(current);
 
         for (int i = 0; i < naapurit.getLength(); i++) {
-            Solmu naapuri = naapurit.getIndex(i);
+            Solmu naapuri = naapurit.getSolmuIndex(i);
 
             if (!naapuri.isVisited()) {
-                int alkuun = current.get_g_score()
+                int arvioAlkuun = current.get_g_score()
                         + labyrintti.dist_between(current, naapuri);
 
-                if (!this.open2.contains(naapuri) || alkuun < naapuri.get_f_score()) {
+                if (!this.open2.contains(naapuri) || arvioAlkuun < naapuri.get_g_score()) {
                     naapuri.setPrevious(current);
-                    naapuri.set_g_score(alkuun);
+                    naapuri.set_g_score(arvioAlkuun);
                     naapuri.set_f_score(goal);
 
                     if (!this.open2.contains(naapuri)) {
@@ -153,7 +187,12 @@ public class Astar2 {
 
     }
 
-    Pino getPolku() {
+    /**
+     * Palauttaa lasketun polun.
+     *
+     * @return
+     */
+    public Pino getPolku() {
         return this.polku;
     }
 

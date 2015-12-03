@@ -20,6 +20,8 @@ public class PinoTest {
 
     Pino pino;
     Solmu solmu;
+    Solmu solmu2;
+    Solmu solmu3;
 
     public PinoTest() {
     }
@@ -36,6 +38,8 @@ public class PinoTest {
     public void setUp() {
         this.pino = new Pino(3);
         this.solmu = new Solmu(1, 5);
+        this.solmu2 = new Solmu(2, 5);
+        this.solmu3 = new Solmu(7, 7);
     }
 
     @After
@@ -50,51 +54,58 @@ public class PinoTest {
     }
 
     @Test
-    public void testEmpty() {
+    public void pushAndPopMultiple() {
+        this.pino.push(solmu3);
+        this.pino.push(solmu2);
+        this.pino.push(solmu);
+        this.pino.pop();
+        this.pino.pop();
+        String otetaanPinosta = this.pino.pop().toString();
+        assertEquals("x: 7, y: 7", otetaanPinosta);
+    }
+
+    @Test
+    public void testEmptyTrue() {
         String tyhja = "" + this.pino.empty();
         assertEquals("true", tyhja);
     }
 
-    /**
-     * Test of push method, of class Pino.
-     */
     @Test
-    public void testPush() {
-        System.out.println("push");
-        Solmu current = null;
-        Pino instance = null;
-        instance.push(current);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of pop method, of class Pino.
-     */
-    @Test
-    public void testPop() {
-        System.out.println("pop");
-        Pino instance = null;
-        Solmu expResult = null;
-        Solmu result = instance.pop();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testEmptyFalse() {
+        this.pino.push(solmu);
+        String tyhja = "" + this.pino.empty();
+        assertEquals("false", tyhja);
     }
 
     /**
      * Test of contains method, of class Pino.
      */
     @Test
-    public void testContains() {
+    public void testContainsTrue() {
         System.out.println("contains");
-        Solmu solmu = null;
-        Pino instance = null;
-        boolean expResult = false;
-        boolean result = instance.contains(solmu);
+
+        this.pino.push(solmu3);
+        this.pino.push(solmu2);
+        this.pino.push(solmu);
+
+        boolean result = this.pino.contains(solmu2);
+        boolean expResult = true;
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of contains method, of class Pino.
+     */
+    @Test
+    public void testContainsFalse() {
+        System.out.println("contains");
+
+        this.pino.push(solmu3);
+        this.pino.push(solmu);
+
+        boolean result = this.pino.contains(solmu2);
+        boolean expResult = false;
+        assertEquals(expResult, result);
     }
 
 }

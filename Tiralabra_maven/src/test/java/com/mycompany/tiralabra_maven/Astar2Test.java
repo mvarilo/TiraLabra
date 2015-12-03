@@ -17,22 +17,22 @@ import static org.junit.Assert.*;
  * @author MV
  */
 public class Astar2Test {
-    
+
     public Astar2Test() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -44,7 +44,7 @@ public class Astar2Test {
     public void testSearch() {
         System.out.println("search");
         Astar2 instance = null;
-        instance.search();
+        instance.searchPriorityQueue();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -76,5 +76,5 @@ public class Astar2Test {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+
 }

@@ -14,10 +14,9 @@ public class Solmu implements Comparable<Solmu> {
 
     private int x, y;
     private boolean obstacle;
-    private int g_score;
+    private int matkaAlkuun;
     private int f_score;
     private int index;
-    private int totalCost;
     private Solmu edellinen;
     private boolean visited;
 
@@ -28,7 +27,7 @@ public class Solmu implements Comparable<Solmu> {
      * @param j
      */
     public Solmu(int i, int j) {
-        this.g_score = Integer.MAX_VALUE;
+        this.matkaAlkuun = Integer.MAX_VALUE;
         this.x = i;
         this.y = j;
         this.obstacle = false;
@@ -46,6 +45,7 @@ public class Solmu implements Comparable<Solmu> {
     }
 
     /**
+     * Palauttaa solmun x-koordinaatin.
      *
      * @return
      */
@@ -54,6 +54,7 @@ public class Solmu implements Comparable<Solmu> {
     }
 
     /**
+     * Palauttaa solmun y-koordinaatin.
      *
      * @return
      */
@@ -71,30 +72,43 @@ public class Solmu implements Comparable<Solmu> {
     }
 
     /**
+     * Asettaa arvon solmun matkalle alkuun.
      *
      * @param i
      */
     public void set_g_score(int i) {
-        this.g_score = i;
+        this.matkaAlkuun = i;
     }
 
     /**
+     * Palauttaa arvion matkasta alkusolmuun.
      *
      * @return
      */
     public int get_g_score() {
-        return this.g_score;
+        return this.matkaAlkuun;
     }
 
     /**
+     * Asettaa arvion kokonaiskustannuksesta maaliin.
      *
      * @param goal
      */
     public void set_f_score(Solmu goal) {
-        this.f_score = Math.abs((this.x - goal.getX()) + (this.y - goal.getY())) + get_g_score();
+        this.f_score = Math.abs(this.x - goal.getX()) + Math.abs(this.y - goal.getY()) + get_g_score();
     }
 
     /**
+     * Asettaa arvion kokonaiskustannuksesta suoraan (testejä varten)
+     *
+     * @param score
+     */
+    public void set_f_score(int score) {
+        this.f_score = score;
+    }
+
+    /**
+     * Palauttaa arvion maaliin.
      *
      * @return
      */
@@ -114,13 +128,14 @@ public class Solmu implements Comparable<Solmu> {
     }
 
     /**
-     *
+     * Asettaa solmun olevan este.
      */
     public void setObstacle() {
         this.obstacle = true;
     }
 
     /**
+     * Asettaa solmun indeksin keossa.
      *
      * @param i
      */
@@ -129,13 +144,22 @@ public class Solmu implements Comparable<Solmu> {
     }
 
     /**
+     * Hakee solmun indeksin keossa.
      *
+     */
+    public int getIndex() {
+        return this.index;
+    }
+
+    /**
+     * Asettaa solmun käydyksi.
      */
     public void setVisited() {
         this.visited = true;
     }
 
     /**
+     * Palauttaa onko solmu käyty läpi.
      *
      * @return
      */
@@ -147,6 +171,7 @@ public class Solmu implements Comparable<Solmu> {
     }
 
     /**
+     * Asettaa edellisen solmun arvon.
      *
      * @param current
      */
@@ -154,7 +179,12 @@ public class Solmu implements Comparable<Solmu> {
         this.edellinen = current;
     }
 
-    Solmu getPrevious() {
+    /**
+     * Palauttaa edellisen solmun.
+     *
+     * @return Solmu
+     */
+    public Solmu getPrevious() {
         return this.edellinen;
     }
 }

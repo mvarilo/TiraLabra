@@ -40,7 +40,7 @@ public class AstarTest {
         this.start = labyrintti.getStart();
         this.goal = labyrintti.getGoal();
 
-        this.astar = new Astar(labyrintti, start, goal);
+        this.astar = new Astar(labyrintti);
     }
 
     @After

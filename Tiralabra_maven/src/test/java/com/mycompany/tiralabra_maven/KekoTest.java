@@ -18,6 +18,9 @@ import static org.junit.Assert.*;
  */
 public class KekoTest {
 
+    Keko keko;
+    Solmu solmu, solmu2, solmu3;
+
     public KekoTest() {
     }
 
@@ -31,6 +34,13 @@ public class KekoTest {
 
     @Before
     public void setUp() {
+        this.keko = new Keko(3);
+        this.solmu = new Solmu(1, 2);
+        this.solmu.set_f_score(6);
+        this.solmu2 = new Solmu(3, 4);
+        this.solmu2.set_f_score(4);
+        this.solmu3 = new Solmu(6, 6);
+        this.solmu3.set_f_score(1);
     }
 
     @After
@@ -42,26 +52,30 @@ public class KekoTest {
      */
     @Test
     public void testAdd() {
-        System.out.println("add");
-        Solmu start = null;
-        Keko instance = null;
-        instance.add(start);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        this.keko.add(solmu);
+        String result = this.keko.getSolmuIndex(0).toString();
+        assertEquals("x: 1, y: 2", result);
     }
 
     /**
      * Test of isEmpty method, of class Keko.
      */
     @Test
-    public void testIsEmpty() {
-        System.out.println("isEmpty");
-        Keko instance = null;
+    public void testIsEmptyFalse() {
+        this.keko.add(solmu);
         boolean expResult = false;
-        boolean result = instance.isEmpty();
+        boolean result = this.keko.isEmpty();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of isEmpty method, of class Keko.
+     */
+    @Test
+    public void testIsEmptyTrue() {
+        boolean expResult = true;
+        boolean result = this.keko.isEmpty();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -69,28 +83,35 @@ public class KekoTest {
      */
     @Test
     public void testPoll() {
-        System.out.println("poll");
-        Keko instance = null;
-        Solmu expResult = null;
-        Solmu result = instance.poll();
+        this.keko.add(solmu);
+        Solmu expResult = solmu;
+        Solmu result = this.keko.poll();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of contains method, of class Keko.
      */
     @Test
-    public void testContains() {
-        System.out.println("contains");
-        Solmu neighbour = null;
-        Keko instance = null;
-        boolean expResult = false;
-        boolean result = instance.contains(neighbour);
+    public void testContainsTrue() {
+        this.keko.add(solmu);
+        this.keko.add(solmu2);
+        this.keko.add(solmu3);
+        boolean expResult = true;
+        boolean result = this.keko.contains(solmu3);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of contains method, of class Keko.
+     */
+    @Test
+    public void testContainsFalse() {
+        this.keko.add(solmu);
+        this.keko.add(solmu2);
+        boolean expResult = false;
+        boolean result = this.keko.contains(solmu3);
+        assertEquals(expResult, result);
     }
 
     /**
@@ -98,13 +119,9 @@ public class KekoTest {
      */
     @Test
     public void testGetLength() {
-        System.out.println("getLength");
-        Keko instance = null;
         int expResult = 0;
-        int result = instance.getLength();
+        int result = this.keko.getLength();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -112,14 +129,11 @@ public class KekoTest {
      */
     @Test
     public void testGetIndex() {
-        System.out.println("getIndex");
         int i = 0;
-        Keko instance = null;
-        Solmu expResult = null;
-        Solmu result = instance.getIndex(i);
+        this.keko.add(solmu);
+        Solmu expResult = solmu;
+        Solmu result = this.keko.getSolmuIndex(i);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
 }

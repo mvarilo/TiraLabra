@@ -11,32 +11,58 @@ package com.mycompany.tiralabra_maven;
  *
  * @author MV
  */
-class Pino {
+public class Pino {
 
     private Solmu[] taulukko;
     private int top;
 
-    Pino(int size) {
+    /**
+     * Luo uuden pinon, jolle asetetaan koko.
+     *
+     * @param size
+     */
+    public Pino(int size) {
         this.top = -1;
         this.taulukko = new Solmu[size * size];
     }
 
-    void push(Solmu current) {
+    /**
+     * Lisää annetun Solmun pinon päällimmäiseksi.
+     *
+     * @param current
+     */
+    public void push(Solmu current) {
         this.top++;
         taulukko[this.top] = current;
     }
 
-    boolean empty() {
+    /**
+     * Tarkastaa onko pino tyhjä.
+     *
+     * @return
+     */
+    public boolean empty() {
         return this.top == -1;
     }
 
-    Solmu pop() {
+    /**
+     * Poistaa päällimmäisen Solmun pinosta ja palauttaa sen.
+     *
+     * @return
+     */
+    public Solmu pop() {
         Solmu pop = taulukko[this.top];
         this.top--;
         return pop;
     }
 
-    boolean contains(Solmu solmu) {
+    /**
+     * Tarkastaa onko kyseinen Solmu pinossa.
+     *
+     * @param solmu
+     * @return
+     */
+    public boolean contains(Solmu solmu) {
         for (int i = 0; i < this.top; i++) {
             if (taulukko[i] == solmu) {
                 return true;

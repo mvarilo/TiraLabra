@@ -78,6 +78,7 @@ public class Keko {
     }
 
     /**
+     * Etsii onko keossa annettu solmu.
      *
      * @param neighbour
      * @return
@@ -150,8 +151,29 @@ public class Keko {
         return this.keonPituus;
     }
 
-    Solmu getIndex(int i) {
-        return keko[i];
+    /**
+     * Palauttaa keossa olevan solmun.
+     *
+     *
+     * @param s
+     * @return
+     */
+    public int getIndex(Solmu s) {
+
+        for (int i = 0; i < this.keonPituus; ++i) {
+            if (this.keko[i].equals(s)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    Solmu getSolmuIndex(int i) {
+        return this.keko[i];
+    }
+
+    void update(int index) {
+        this.heapify(index);
     }
 
 }

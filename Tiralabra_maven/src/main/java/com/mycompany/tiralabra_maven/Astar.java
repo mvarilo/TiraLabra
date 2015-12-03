@@ -13,9 +13,9 @@ import java.util.Stack;
 /**
  * Toteuttaa A*-algoritmiin pohjautuvan lyhimmän reitin etsinnän. Käytetty javan
  * valmista kalustoa perustuen Wikipediasta löydettyyn pseudokoodiin.
- * 
+ *
  * Tällä hetkellä ei ole aivan kaikkea mitä Astar2:sta löytyy.
- * 
+ *
  * http://en.wikipedia.org/wiki/A*_search_algorithm
  *
  *
@@ -37,10 +37,10 @@ public class Astar {
      * @param start
      * @param goal
      */
-    public Astar(Labyrintti labyrintti, Solmu start, Solmu goal) {
+    public Astar(Labyrintti labyrintti) {
         this.labyrintti = labyrintti;
-        this.start = start;
-        this.goal = goal;
+        this.start = this.labyrintti.getStart();
+        this.goal = this.labyrintti.getGoal();
         this.open = new PriorityQueue<Solmu>();
         this.evaluated = new ArrayList<Solmu>();
         this.Came_From = new HashMap<Solmu, Solmu>();

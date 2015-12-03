@@ -19,20 +19,44 @@ public class Labyrintti {
     private Solmu goal;
 
     /**
-     * Konstruktori luo pyydetyn kokoisen labyrintin ja antaa sille lähtö ja
-     * maaliarvot
+     * Konstruktori luo pyydetyn kokoisen labyrintin, arpoo sille lähdön,
+     * maalin, sekä esteet.
      *
      * @param koko labyrintin koko
      */
     public Labyrintti(int koko) {
         this.labyrintti = new Solmu[koko][koko];
+        luoSolmut();
+        arvoLahtoJaMaali();
+        arvoEsteet(koko);
+    }
+
+    private void luoSolmut() {
         for (int i = 0; i < labyrintti.length; i++) {
             for (int j = 0; j < labyrintti.length; j++) {
                 Solmu uus = new Solmu(i, j);
                 labyrintti[i][j] = uus;
             }
         }
-        testiLabyrintti();
+    }
+
+    /**
+     * Konstruktori luo testeihin tarkoitetun labyrintin.
+     *
+     *
+     */
+    public Labyrintti() {
+        this.labyrintti = new Solmu[7][7];
+        luoSolmut();
+
+        this.start = this.labyrintti[2][0];
+        this.goal = this.labyrintti[4][4];
+
+        Solmu s;
+        for (int i = 1; i < 6; i++) {
+            s = this.labyrintti[i][3];
+            s.setObstacle();
+        }
     }
 
     /**
@@ -48,7 +72,7 @@ public class Labyrintti {
     }
 
     /**
-     * Visualisoi labyrintin helposti luettavassa muodossa
+     * Visualisoi labyrintin helposti luettavassa muodossa.
      *
      */
     public void visualisoi() {
@@ -74,6 +98,7 @@ public class Labyrintti {
     }
 
     /**
+     * Palauttaa algoritmin laskeman polun kohteeseen.
      *
      * @param polku
      */
@@ -106,31 +131,25 @@ public class Labyrintti {
     }
 
     /**
-     * Arpoo (todo) lähtö ja maaliarvot labyrintille
+     * Arpoo esteitä labyrintille
      *
      */
-    private void testiLabyrintti() {
-        int min = 0;
-        int max = this.labyrintti.length - 1;
+    private void arvoEsteet(int koko) {
+        Solmu s;
 
-        start = this.labyrintti[0][0];
-        goal = this.labyrintti[4][4];
-
-        Solmu s = this.labyrintti[0][3];
-        s.setObstacle();
-        s = this.labyrintti[1][3];
-        s.setObstacle();
-        s = this.labyrintti[2][3];
-        s.setObstacle();
-        s = this.labyrintti[3][3];
-        s.setObstacle();
-        s = this.labyrintti[4][3];
-        s.setObstacle();
-        s = this.labyrintti[5][3];
-        s.setObstacle();
+        for (int i = 0; i < koko*2; i++) {
+            int x = random();
+            int y = random();
+            if (this.labyrintti[x][y] != goal && this.labyrintti[x][y] != start
+                    && !this.labyrintti[x][y].isObstacle()) {
+                s = this.labyrintti[x][y];
+                s.setObstacle();
+            }
+        }
     }
 
     /**
+     * Palauttaa solmun labyrintin koordinaateissa.
      *
      * @param x
      * @param y
@@ -141,6 +160,7 @@ public class Labyrintti {
     }
 
     /**
+     * Palauttaa aloitusarvon labyrintissä.
      *
      * @return
      */
@@ -149,6 +169,7 @@ public class Labyrintti {
     }
 
     /**
+     * Palauttaa maalisolmun labyrintissä.
      *
      * @return
      */
@@ -157,7 +178,8 @@ public class Labyrintti {
     }
 
     /**
-     * Etsii solmun naapurit, joissa ei ole estettä.
+     * Etsii solmun naapurit, joissa ei ole estettä Javan valmiilla
+     * tietorakenteella.
      *
      * @param current
      * @return
@@ -196,6 +218,7 @@ public class Labyrintti {
     }
 
     /**
+     * Palauttaa labyrintin koon.
      *
      * @return
      */
@@ -204,6 +227,7 @@ public class Labyrintti {
     }
 
     /**
+     * Etsii solmun naapurit, joissa ei ole estettä. Omalla tietorakenteella.
      *
      * @param current
      * @return
@@ -228,5 +252,23 @@ public class Labyrintti {
         }
 
         return naapurit;
+    }
+
+    private int random() {
+        int min = 0;
+        int max = this.labyrintti.length - 1;
+
+        int x = min + (int) (Math.random() * (max - min));
+        return x;
+    }
+
+    private void arvoLahtoJaMaali() {
+        this.start = this.labyrintti[random()][random()];
+        this.goal = this.labyrintti[random()][random()];
+
+        while (this.goal.getX() == this.start.getX() && this.goal.getY() == this.start.getY()
+                || this.getNeighbours2(start).contains(goal)) {
+            this.goal = this.labyrintti[random()][random()];
+        }
     }
 }

@@ -1,7 +1,7 @@
 package com.mycompany.tiralabra_maven;
 
 /**
- * Vastaa ohjelman käynnistämisestä
+ * Vastaa ohjelman käynnistämisestä ja suorituskykytestauksesta.
  *
  */
 public class Main {
@@ -11,27 +11,45 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        // Luodaan labyrintti
-        Labyrintti labyrintti = new Labyrintti(7);
+        Labyrintti labyrintti = new Labyrintti();
 
-        // Tulostetaan labyrintti luettavasa muodossa
-        labyrintti.visualisoi();
+        omaKekoSuoritus(labyrintti);
+        priorityQueueSuoritus(labyrintti);
 
-        // labyrintti.tulosta();
-        Astar astar;
-        astar = new Astar(labyrintti, labyrintti.getStart(), labyrintti.getGoal());
-        //Etsii ja tulostaa lyhimmän reitin
-        long aikaAlussa = System.nanoTime();
-        astar.search();
-        long aikaLopussa = System.nanoTime();
-        System.out.println("Aikaa kului: " + (aikaLopussa - aikaAlussa) + "ns.");
+        tulostaLabyrinttihaku();
+    }
 
-        Astar2 astar2;
-        astar2 = new Astar2(labyrintti, labyrintti.getStart(), labyrintti.getGoal());
-        long aikaAlussa2 = System.nanoTime();
-        boolean tulos = astar2.searchKeko();
-        labyrintti.visualisoiPolku(astar2.getPolku());
-        long aikaLopussa2 = System.nanoTime();
-        System.out.println("Aikaa kului: " + (aikaLopussa2 - aikaAlussa2) + "ns.");
+    private static void tulostaLabyrinttihaku() {
+        Astar2 astar;
+        Labyrintti labyrintti = new Labyrintti();
+        astar = new Astar2(labyrintti);
+        astar.searchKeko();
+        labyrintti.visualisoiPolku(astar.getPolku());
+    }
+
+    private static void priorityQueueSuoritus(Labyrintti labyrintti) {
+        System.out.println();
+        System.out.println("Search Javan priority queuella 100000x:");
+
+        long aikaAlussa = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++) {
+            Astar2 astar = new Astar2(labyrintti);
+            astar.searchPriorityQueue();
+        }
+        long aikaLopussa = System.currentTimeMillis();
+        System.out.println(aikaLopussa - aikaAlussa + "ms.");
+    }
+
+    private static void omaKekoSuoritus(Labyrintti labyrintti) {
+        System.out.println();
+        System.out.println("Search omalla keolla 100000x:");
+
+        long aikaAlussa = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++) {
+            Astar2 astar = new Astar2(labyrintti);
+            astar.searchKeko();
+        }
+        long aikaLopussa = System.currentTimeMillis();
+        System.out.println(aikaLopussa - aikaAlussa + "ms.");
     }
 }
