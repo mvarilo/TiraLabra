@@ -8,7 +8,7 @@ Muu suurin piirtein valmis, paitsi ohjelman ulkopuolinen dokumentointi ja osa te
 Suoritustestausta.
 
 # Mikä jäi epäselväksi tai tuottanut vaikeuksia?
-
+Aika muiden algoritmien toteutukselle.
 
 # Mitä teen seuraavaksi?
 Asiat loppuun (dokumentointi, testaukset)
