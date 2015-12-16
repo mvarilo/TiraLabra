@@ -124,4 +124,34 @@ public class SolmuTest {
         assertEquals(-1, result);
     }
 
+    @Test
+    public void testPrevious() {
+        Solmu s = new Solmu(1, 2);
+        this.solmu.setPrevious(s);
+        String previous = this.solmu.getPrevious().toString();
+        assertEquals("x: 1, y: 2", previous);
+    }
+
+    /**
+     * Test of setIndex method, of class Solmu.
+     */
+    @Test
+    public void testIndex() {
+        int i = 3;
+        this.solmu.setIndex(3);
+        int result = this.solmu.getIndex();
+        assertEquals(3, result);
+    }
+
+    /**
+     * Test of setVisited method, of class Solmu.
+     */
+    @Test
+    public void testVisited() {
+        this.solmu.setVisited();
+        boolean result = this.solmu.isVisited();
+
+        assertEquals(true, result);
+    }
+    
 }

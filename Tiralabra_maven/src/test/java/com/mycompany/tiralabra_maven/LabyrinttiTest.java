@@ -47,7 +47,7 @@ public class LabyrinttiTest {
      */
     @Before
     public void setUp() {
-        labyrintti = new Labyrintti(7);
+        labyrintti = new Labyrintti();
     }
 
     /**
@@ -76,7 +76,7 @@ public class LabyrinttiTest {
     @Test
     public void testGetStart() {
         System.out.println("getStart");
-        String expResult = "x: 0, y: 0";
+        String expResult = "x: 2, y: 0";
         String result = this.labyrintti.getStart().toString();
         assertEquals(expResult, result);
     }
@@ -93,42 +93,17 @@ public class LabyrinttiTest {
     }
 
     /**
-     * Test of tulosta method, of class Labyrintti.
-     */
-    @Test
-    public void testTulosta() {
-        System.out.println("tulosta");
-        Labyrintti instance = null;
-        instance.tulosta();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of visualisoi method, of class Labyrintti.
-     */
-    @Test
-    public void testVisualisoi() {
-        System.out.println("visualisoi");
-        Labyrintti instance = null;
-        instance.visualisoi();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getNeighbours method, of class Labyrintti.
      */
     @Test
-    public void testGetNeighbours() {
-        System.out.println("getNeighbours");
-        Solmu current = null;
-        Labyrintti instance = null;
-        ArrayList<Solmu> expResult = null;
-        ArrayList<Solmu> result = instance.getNeighbours(current);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testGetNeighbours2() {
+        Solmu solmu = this.labyrintti.getSolmu(2, 0);
+        Keko naapurit = this.labyrintti.getNeighbours2(solmu);
+        String naapuri1 = naapurit.poll().toString();
+        String naapuri2 = naapurit.poll().toString();
+        String naapuri3 = naapurit.poll().toString();
+        String kaikkiNaapurit = "" + naapuri1 + " " + naapuri2 + " " + naapuri3;
+        assertEquals("x: 1, y: 0 x: 2, y: 1 x: 3, y: 0", kaikkiNaapurit);
     }
 
     /**
@@ -137,14 +112,11 @@ public class LabyrinttiTest {
     @Test
     public void testDist_between() {
         System.out.println("dist_between");
-        Solmu current = null;
-        Solmu neighbour = null;
-        Labyrintti instance = null;
-        int expResult = 0;
-        int result = instance.dist_between(current, neighbour);
+        Solmu current = this.labyrintti.getSolmu(0, 1);
+        Solmu neighbour = this.labyrintti.getSolmu(0, 0);
+        int expResult = 1;
+        int result = this.labyrintti.dist_between(current, neighbour);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -152,41 +124,9 @@ public class LabyrinttiTest {
      */
     @Test
     public void testGetSize() {
-        System.out.println("getSize");
-        Labyrintti instance = null;
-        int expResult = 0;
-        int result = instance.getSize();
+        int expResult = 49;
+        int result = this.labyrintti.getSize();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of visualisoiPolku method, of class Labyrintti.
-     */
-    @Test
-    public void testVisualisoiPolku() {
-        System.out.println("visualisoiPolku");
-        Pino polku = null;
-        Labyrintti instance = null;
-        instance.visualisoiPolku(polku);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getNeighbours2 method, of class Labyrintti.
-     */
-    @Test
-    public void testGetNeighbours2() {
-        System.out.println("getNeighbours2");
-        Solmu current = null;
-        Labyrintti instance = null;
-        Keko expResult = null;
-        Keko result = instance.getNeighbours2(current);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
 }

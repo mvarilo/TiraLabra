@@ -23,7 +23,7 @@ public class Pino {
      */
     public Pino(int size) {
         this.top = -1;
-        this.taulukko = new Solmu[size * size];
+        this.taulukko = new Solmu[size];
     }
 
     /**
@@ -51,9 +51,12 @@ public class Pino {
      * @return
      */
     public Solmu pop() {
-        Solmu pop = taulukko[this.top];
-        this.top--;
-        return pop;
+        if (!this.empty()) {
+            Solmu pop = taulukko[this.top];
+            this.top--;
+            return pop;
+        }
+        return null;
     }
 
     /**

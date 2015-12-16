@@ -34,8 +34,6 @@ public class Astar {
      * Konstruktori saa parametreinä labyrintin, lähtö- ja maalisolmun.
      *
      * @param labyrintti
-     * @param start
-     * @param goal
      */
     public Astar(Labyrintti labyrintti) {
         this.labyrintti = labyrintti;

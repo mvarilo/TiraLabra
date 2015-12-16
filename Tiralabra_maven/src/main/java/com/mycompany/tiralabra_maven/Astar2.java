@@ -50,6 +50,8 @@ public class Astar2 {
     /**
      * Etsii ja tulostaa lyhimmän reitin labyrintin läpi käyttäen valmiita
      * tietorakenteita.
+     *
+     * @return
      */
     public boolean searchPriorityQueue() {
         this.open.add(start);
@@ -64,9 +66,7 @@ public class Astar2 {
                 return true;
             }
 
-            this.open.remove(current);
-            this.evaluated.add(current);
-
+            current.setVisited();
             handleNeighbours(current);
         }
         return false;

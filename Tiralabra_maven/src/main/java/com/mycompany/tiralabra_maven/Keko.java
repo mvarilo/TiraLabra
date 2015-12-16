@@ -110,7 +110,7 @@ public class Keko {
     private void heapify(int i) {
         int v = vasen(i);
         int o = right(i);
-        int pienin;
+        int pienin = 0;
 
         if (o <= this.keonPituus) {
             if (this.keko[v].get_f_score() < this.keko[o].get_f_score()) {

@@ -43,6 +43,19 @@ public class Labyrintti {
     /**
      * Konstruktori luo testeihin tarkoitetun labyrintin.
      *
+     * [v][v][s][v][v][v][ ]
+     *
+     * [v][v][p][v][v][v][ ]
+     *
+     * [v][v][p][p][p][p][p]
+     *
+     * [v][#][#][#][#][#][p]
+     *
+     * [ ][ ][ ][ ][g][p][p]
+     *
+     * [ ][ ][ ][ ][ ][ ][ ]
+     *
+     * [ ][ ][ ][ ][ ][ ][ ]
      *
      */
     public Labyrintti() {
@@ -137,7 +150,7 @@ public class Labyrintti {
     private void arvoEsteet(int koko) {
         Solmu s;
 
-        for (int i = 0; i < koko*2; i++) {
+        for (int i = 0; i < koko * (0.3 * koko); i++) {
             int x = random();
             int y = random();
             if (this.labyrintti[x][y] != goal && this.labyrintti[x][y] != start
@@ -187,20 +200,24 @@ public class Labyrintti {
     public ArrayList<Solmu> getNeighbours(Solmu current) {
         ArrayList<Solmu> naapurit = new ArrayList<Solmu>();
 
-        if (current.getX() > 0 && current.isObstacle() != true) {
-            naapurit.add(this.labyrintti[current.getX() - 1][current.getY()]);
+        if (vasen(current)) {
+            Solmu naapuri = this.labyrintti[current.getX() - 1][current.getY()];
+            lisaaNaapuri2(naapurit, naapuri);
         }
 
-        if (current.getX() < this.labyrintti.length - 1 && current.isObstacle() != true) {
-            naapurit.add((this.labyrintti[current.getX() + 1][current.getY()]));
+        if (oikea(current)) {
+            Solmu naapuri = this.labyrintti[current.getX() + 1][current.getY()];
+            lisaaNaapuri2(naapurit, naapuri);
         }
 
-        if (current.getY() > 0 && current.isObstacle() != true) {
-            naapurit.add(this.labyrintti[current.getX()][current.getY() - 1]);
+        if (ylos(current)) {
+            Solmu naapuri = this.labyrintti[current.getX()][current.getY() - 1];
+            lisaaNaapuri2(naapurit, naapuri);
         }
 
-        if (current.getY() < this.labyrintti.length - 1 && current.isObstacle() != true) {
-            naapurit.add((this.labyrintti[current.getX()][current.getY() + 1]));
+        if (alas(current)) {
+            Solmu naapuri = this.labyrintti[current.getX()][current.getY() + 1];
+            lisaaNaapuri2(naapurit, naapuri);
         }
         return naapurit;
     }
@@ -233,22 +250,26 @@ public class Labyrintti {
      * @return
      */
     public Keko getNeighbours2(Solmu current) {
-        Keko naapurit = new Keko(8);
+        Keko naapurit = new Keko(4);
 
-        if (current.getX() > 0 && current.isObstacle() != true) {
-            naapurit.add(this.labyrintti[current.getX() - 1][current.getY()]);
+        if (vasen(current)) {
+            Solmu naapuri = this.labyrintti[current.getX() - 1][current.getY()];
+            lisaaNaapuri(naapurit, naapuri);
         }
 
-        if (current.getX() < this.labyrintti.length - 1 && current.isObstacle() != true) {
-            naapurit.add((this.labyrintti[current.getX() + 1][current.getY()]));
+        if (oikea(current)) {
+            Solmu naapuri = this.labyrintti[current.getX() + 1][current.getY()];
+            lisaaNaapuri(naapurit, naapuri);
         }
 
-        if (current.getY() > 0 && current.isObstacle() != true) {
-            naapurit.add(this.labyrintti[current.getX()][current.getY() - 1]);
+        if (ylos(current)) {
+            Solmu naapuri = this.labyrintti[current.getX()][current.getY() - 1];
+            lisaaNaapuri(naapurit, naapuri);
         }
 
-        if (current.getY() < this.labyrintti.length - 1 && current.isObstacle() != true) {
-            naapurit.add((this.labyrintti[current.getX()][current.getY() + 1]));
+        if (alas(current)) {
+            Solmu naapuri = this.labyrintti[current.getX()][current.getY() + 1];
+            lisaaNaapuri(naapurit, naapuri);
         }
 
         return naapurit;
@@ -270,5 +291,34 @@ public class Labyrintti {
                 || this.getNeighbours2(start).contains(goal)) {
             this.goal = this.labyrintti[random()][random()];
         }
+    }
+
+    private void lisaaNaapuri(Keko naapurit, Solmu naapuri) {
+        if (naapuri.isObstacle() != true && naapuri.isVisited() != true) {
+            naapurit.add(naapuri);
+        }
+    }
+
+    private void lisaaNaapuri2(ArrayList<Solmu> naapurit, Solmu naapuri) {
+        if (naapuri.isObstacle() != true && naapuri.isVisited() != true) {
+            naapurit.add(naapuri);
+        }
+
+    }
+
+    private boolean vasen(Solmu current) {
+        return current.getX() > 0;
+    }
+
+    private boolean oikea(Solmu current) {
+        return current.getX() < this.labyrintti.length - 1;
+    }
+
+    private boolean ylos(Solmu current) {
+        return current.getY() > 0;
+    }
+
+    private boolean alas(Solmu current) {
+        return current.getY() < this.labyrintti.length - 1;
     }
 }

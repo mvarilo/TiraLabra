@@ -40,6 +40,7 @@ public class Solmu implements Comparable<Solmu> {
      *
      * @return
      */
+    @Override
     public String toString() {
         return "x: " + this.x + ", y: " + this.y;
     }
@@ -146,6 +147,7 @@ public class Solmu implements Comparable<Solmu> {
     /**
      * Hakee solmun indeksin keossa.
      *
+     * @return
      */
     public int getIndex() {
         return this.index;
