@@ -38,39 +38,52 @@ public class Main {
     }
 
     private static void tulostaRandomLabyrintti(int koko) {
+        long aikaAlussa1 = System.nanoTime();
         Astar2 astar;
         Labyrintti labyrintti = new Labyrintti(koko);
         astar = new Astar2(labyrintti);
+        long aikaLopussa1 = System.nanoTime();
+
+        long aikaAlussa2 = System.nanoTime();
         astar.searchKeko();
+        long aikaLopussa2 = System.nanoTime();
+
+        long aikaAlussa3 = System.nanoTime();
         labyrintti.visualisoiPolku(astar.getPolku());
+        long aikaLopussa3 = System.nanoTime();
+
+        System.out.println("Alustus: " + ((double) (aikaLopussa1 - aikaAlussa1) / 1000000) + " ms");
+        System.out.println("Haku: " + ((double) (aikaLopussa2 - aikaAlussa2) / 1000000) + " ms");
     }
 
     private static void priorityQueueSuoritus() {
         Labyrintti labyrintti = new Labyrintti();
+        Astar2 astar;
         System.out.println();
         System.out.println("Search Javan priority queuella 1000000x:");
 
-        long aikaAlussa = System.currentTimeMillis();
+        long aikaAlussa = System.nanoTime();
         for (int i = 0; i < 1000000; i++) {
-            Astar2 astar = new Astar2(labyrintti);
+            astar = new Astar2(labyrintti);
             astar.searchPriorityQueue();
         }
-        long aikaLopussa = System.currentTimeMillis();
-        System.out.println(aikaLopussa - aikaAlussa + "ms.");
+        long aikaLopussa = System.nanoTime();
+        System.out.println("" + ((double) +aikaLopussa - aikaAlussa) / 1000000 + "ms.");
     }
 
     private static void omaKekoSuoritus() {
         Labyrintti labyrintti = new Labyrintti();
+        Astar2 astar;
         System.out.println();
         System.out.println("Search omalla keolla 1000000x:");
 
-        long aikaAlussa = System.currentTimeMillis();
+        long aikaAlussa = System.nanoTime();
         for (int i = 0; i < 1000000; i++) {
-            Astar2 astar = new Astar2(labyrintti);
+            astar = new Astar2(labyrintti);
             astar.searchKeko();
         }
-        long aikaLopussa = System.currentTimeMillis();
-        System.out.println(aikaLopussa - aikaAlussa + "ms.");
+        long aikaLopussa = System.nanoTime();
+        System.out.println("" + ((double) +aikaLopussa - aikaAlussa) / 1000000 + "ms.");
     }
 
     private static void lukija() {
@@ -111,8 +124,8 @@ public class Main {
                 }
             } else if (vastaus.equalsIgnoreCase("T") || (vastaus.equalsIgnoreCase("R") && valinta == 2)) {
                 valinta = 2;
-                omaKekoSuoritus();
                 priorityQueueSuoritus();
+                omaKekoSuoritus();
 
             }
         }

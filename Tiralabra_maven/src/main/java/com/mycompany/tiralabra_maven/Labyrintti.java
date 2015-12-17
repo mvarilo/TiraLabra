@@ -117,8 +117,8 @@ public class Labyrintti {
      */
     public void visualisoiPolku(Pino polku) {
         System.out.println("\nLabyrintti:");
-        System.out.println("start = s");
-        System.out.println("goal = g");
+        System.out.println("start = S");
+        System.out.println("goal = G");
         System.out.println("obstacle = #");
         System.out.println("path = p");
         System.out.println("visited = v \n");
@@ -126,9 +126,9 @@ public class Labyrintti {
         for (int j = 0; j < labyrintti.length; j++) {
             for (int i = 0; i < labyrintti.length; i++) {
                 if (labyrintti[i][j] == start) {
-                    System.out.print("[s]");
+                    System.out.print("[S]");
                 } else if (labyrintti[i][j] == goal) {
-                    System.out.print("[g]");
+                    System.out.print("[G]");
                 } else if (labyrintti[i][j].isObstacle()) {
                     System.out.print("[#]");
                 } else if (polku.contains(this.getSolmu(i, j))) {
