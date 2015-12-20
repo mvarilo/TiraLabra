@@ -22,26 +22,26 @@ public class Main {
     }
 
     private static void tulostaKeko() {
-        Astar2 astar;
+        Astar astar;
         Labyrintti labyrintti = new Labyrintti();
-        astar = new Astar2(labyrintti);
+        astar = new Astar(labyrintti);
         astar.searchKeko();
         labyrintti.visualisoiPolku(astar.getPolku());
     }
 
     private static void tulostaPriority() {
-        Astar2 astar;
+        Astar astar;
         Labyrintti labyrintti = new Labyrintti();
-        astar = new Astar2(labyrintti);
+        astar = new Astar(labyrintti);
         astar.searchPriorityQueue();
         labyrintti.visualisoiPolku(astar.getPolku());
     }
 
     private static void tulostaRandomLabyrintti(int koko) {
         long aikaAlussa1 = System.nanoTime();
-        Astar2 astar;
+        Astar astar;
         Labyrintti labyrintti = new Labyrintti(koko);
-        astar = new Astar2(labyrintti);
+        astar = new Astar(labyrintti);
         long aikaLopussa1 = System.nanoTime();
 
         long aikaAlussa2 = System.nanoTime();
@@ -58,13 +58,13 @@ public class Main {
 
     private static void priorityQueueSuoritus() {
         Labyrintti labyrintti = new Labyrintti();
-        Astar2 astar;
+        Astar astar;
         System.out.println();
         System.out.println("Search Javan priority queuella 1000000x:");
 
         long aikaAlussa = System.nanoTime();
         for (int i = 0; i < 1000000; i++) {
-            astar = new Astar2(labyrintti);
+            astar = new Astar(labyrintti);
             astar.searchPriorityQueue();
         }
         long aikaLopussa = System.nanoTime();
@@ -73,13 +73,13 @@ public class Main {
 
     private static void omaKekoSuoritus() {
         Labyrintti labyrintti = new Labyrintti();
-        Astar2 astar;
+        Astar astar;
         System.out.println();
         System.out.println("Search omalla keolla 1000000x:");
 
         long aikaAlussa = System.nanoTime();
         for (int i = 0; i < 1000000; i++) {
-            astar = new Astar2(labyrintti);
+            astar = new Astar(labyrintti);
             astar.searchKeko();
         }
         long aikaLopussa = System.nanoTime();
